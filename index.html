@@ -1,0 +1,190 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="lol.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dongle:wght@300&family=Nunito&family=Readex+Pro&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Corinthia&display=swap" rel="stylesheet">
+        <title>Progate II Final Project - Jokes</title>
+    </head>
+    <body>
+        <h1>JOKES GENERATOR</h1>
+        <p id="quote">"A day without laughter is a day wasted."<br></p>
+        <p id="quoter">- Charlie Chaplin</p>
+        <p id="joke"></p>
+        <h2>Pick your category!</h2>
+        <div class="container">
+            <button id="dadjoke" onclick="getdadjk()">Dad Jokes</button>
+            <button id="chuckjoke" onclick="getchuckjk()">Chuck Norris Jokes</button>
+            <button id="randomjoke" onclick="getrandomjk()">Random Jokes</button>
+        </div>
+        <style>
+           html, body {
+               margin: 0;
+               padding: 0;
+           }
+
+           body {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+            background-image: url("bgimage.jpg");
+           }
+
+           h1 {
+               text-align: center;
+               padding-top: 20px;
+               color: black;
+               font-size: 50px;
+               font-family: 'Bebas Neue', cursive;
+           }
+
+           h2 {
+               text-align: center;
+               color: black;
+               font-family: 'Readex', sans-serif;
+           }
+
+           #quote {
+               font-family: 'Corinthia', cursive;
+               font-size: 30px;
+               text-align: center;
+               margin-bottom: -30px;
+               margin: 5px;
+           }
+
+           #quoter {
+                font-family: 'Corinthia', cursive;
+                font-size: 30px;
+                text-align: center;   
+                font-weight: bold;
+                margin-top: 0px;
+           }
+
+           .img {
+               display: flex;
+               padding: 20px;
+               justify-content: center;
+           }
+
+           img {
+               width: 25%;
+               margin-right: 10px;
+               margin-left: 10px;
+           }
+
+           #joke {
+               text-align: center;
+               padding: 50px;
+               overflow-wrap: break-word;
+               border-top: solid black;
+               border-bottom: solid black;
+               font-family: 'Dongle', sans-serif;
+               font-size: 50px;
+               background-color: white;
+               min-height: 25%;
+           }
+
+           .container {
+               display: flex;
+               justify-content: center;
+               margin: 30px 10px;
+           }
+
+           button {
+               font-size: 15px;
+               margin: 10px;
+               width: 200px;
+               height: 50px;
+               border-radius: 5em;
+               background-color: lightgray;
+               border-color: black;
+               font-family: 'Nunito', sans-serif;
+           }
+           
+           /* Footer */
+            footer {
+                height: 30px;
+                margin-top: auto;
+            }
+
+            footer p {
+                color: white;
+                text-align: center;
+                padding: 10px;
+                font-size: 12px;
+                background: black;
+                font-family: 'Nunito', sans-serif;
+            }
+
+            /* responsive */
+            @media all and (max-width: 900px) {
+                button {
+                    font-size: 12px;
+                }
+
+                #joke {
+                    font-size: 30px;
+                }
+
+                footer p {
+                color: white;
+                text-align: center;
+                padding: 10px;
+                font-size: 10px;
+                background: black;
+                }
+            }
+        </style>
+        <script>
+            const jokeContainer = document.getElementById("joke");
+            const dadbtn = document.getElementById("dadjoke");
+            const chuckbtn = document.getElementById("chuckjoke");
+            const randombtn = document.getElementById("randomjoke");
+            const chuckurl = "https://api.chucknorris.io/jokes/random";
+            const dadurl = "https://icanhazdadjoke.com/"
+            const randomurl = "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single";
+
+            const getdadjk = () => {
+                fetch(dadurl, {
+                headers: {
+                    "Accept": "application/json"
+                }
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    jokeContainer.textContent = data.joke;
+                });
+            }
+
+            const getchuckjk = () => {
+                fetch(chuckurl)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    jokeContainer.textContent = `${data.value}`;
+                });
+            }
+
+            const getrandomjk = () => {
+                fetch(randomurl)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    jokeContainer.textContent = `${data.joke}`;
+                });
+            }
+        </script>
+    </body>
+    <footer>
+        <p>Made by Yodhita Maureen Romindo for Progate Advanced Frontend Bootcamp Level 2 - Final Project</p>
+    </footer>
+</html>
